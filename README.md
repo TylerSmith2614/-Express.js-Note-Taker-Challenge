@@ -10,7 +10,7 @@ Link: https://drive.google.com/file/d/14L3kcecJImkscmsargFVc9-baxOMa-Cr/view?usp
 
 ## Heroku Live Link
 
-https://note-taker-challenge-app.herokuapp.com/notesgit 
+https://note-taker-challenge-app.herokuapp.com/notes
 
 ## Not of Help with Project
 
