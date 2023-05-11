@@ -19,6 +19,7 @@ app.get("/notes", (req, res) => {
   res.sendFile(path.join(__dirname, "./public/notes.html"));
 });
 
+// Get Call
 // reads the data in the db.json file. Parses the data so it can be used on the dom (meaning viewable on the webpage)
 const filePath = path.join(__dirname, "db", "db.json");
 app.get("/api/notes", (req, res) => {
@@ -33,7 +34,7 @@ app.get("/api/notes", (req, res) => {
   });
 });
 
-// will have a write file as app.post()
+// Post Call
 app.post("/api/notes", (req, res) => {
   const notes = JSON.parse(fs.readFileSync(filePath));
   const newNotes = { id: uuidv1(), title: req.body.title, text: req.body.text };
@@ -42,7 +43,32 @@ app.post("/api/notes", (req, res) => {
   res.json(newNotes);
 });
 
-// for the delete add uuidv1
+// Delete Request
+// Receive a query parameter that contains the id of a note to delete.
+app.delete("/api/notes/:id", (req, res) => {
+  // read all notes from the `db.json` file
+  fs.readFile(filePath, "utf8", (err, data) => {
+    let notes = JSON.parse(data);
+    const { id } = req.params;
+
+    const index = notes.findIndex((note) => note.id === id);
+
+    if (index === -1) {
+      return res.status(404).json({ error: "Note not found" });
+      // Remove the note with the given `id` property
+    } else notes.splice(index, 1);
+
+    // Rewrite the notes to the `db.json` file.
+    fs.writeFile(filePath, JSON.stringify(notes), (err) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).send("Internal Server Error");
+      }
+
+      res.sendStatus(200);
+    });
+  });
+});
 
 app.listen(PORT, () => {
   console.log(`Example app listening at http://localhost:${PORT}`);
