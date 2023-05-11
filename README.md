@@ -12,7 +12,7 @@ Link: https://drive.google.com/file/d/14L3kcecJImkscmsargFVc9-baxOMa-Cr/view?usp
 
 https://note-taker-challenge-app.herokuapp.com/notes
 
-## Not of Help with Project
+## Note of Help with Project
 
 I received help on the Express.js get, post, and delete calls from my bootcamp tutor Rene Trevino. I also received help debugging my code in my server.js file from stack overflow and chatgpt.
 
